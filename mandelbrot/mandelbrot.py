@@ -10,7 +10,7 @@ Ymin = -2
 Ymax =  2
 
 MAX = 100 # Maximum number of iterations
-sys.setrecursionlimit(MAX + MAX)
+sys.setrecursionlimit(2 * MAX)
     
     
 def iterate(z, c, it):
