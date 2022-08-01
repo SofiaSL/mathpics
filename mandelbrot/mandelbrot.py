@@ -1,15 +1,16 @@
 import png
+import sys
 
-
-height = 1000
-width = 1000
+height = 5000
+width =  5000
 
 Xmin = -2
 Xmax =  2
 Ymin = -2  
 Ymax =  2
 
-MAX = 2000 # Maximum number of iterations
+MAX = 100 # Maximum number of iterations
+sys.setrecursionlimit(MAX + MAX)
     
     
 def iterate(z, c, it):
@@ -24,25 +25,14 @@ image = []
 for h in range(height):
     row = ()
     for w in range(width):
-        x = (Xmax - Xmin) / width
-        y = (Ymax - Ymin) / height
+        x = h * (Xmax - Xmin) / width  + Xmin
+        y = w * (Ymax - Ymin) / height + Ymin
         m = iterate(0, complex(x, y), 0)
 
         if m == None:
-            row += (255,)
+            row += (0,)
         else:
-            if m > MAX - 1950:
-                row += (0,)
-            elif m > MAX - 1900:
-                row += (16,)
-            elif m > MAX - 1850:
-                row += (32,)
-            elif m > MAX - 1800:
-                row += (48,)
-            elif m > MAX - 1750:
-                row += (64,)
-            else:
-                row += (255,)
+            row += (255,)
     image.append(row)
 
 f = open('mandelbrot.png', "wb")
